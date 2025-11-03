@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>温馨提示</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffe6f2;
+      font-family: '微软雅黑', sans-serif;
+      overflow: hidden;
+    }
+    .final {
+      font-size: 3em;
+      color: red;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const tips = ['多喝热水~'];
+  const colors = ['lightpink', 'skyblue', 'lightgreen', 'lightyellow', 'honeydew', 'plum', 'oldlace'];
+  let count = 0;
+  const total = 50;
+
+  function createPopup() {
+    if (count >= total) return;
+    count++;
+
+    const popup = document.createElement('div');
+    popup.style.position = 'absolute';
+    popup.style.left = Math.random() * window.innerWidth + 'px';
+    popup.style.top = Math.random() * window.innerHeight + 'px';
+    popup.style.background = colors[Math.floor(Math.random() * colors.length)];
+    popup.style.padding = '20px';
+    popup.style.borderRadius = '10px';
+    popup.style.fontSize = '18px';
+    popup.style.fontFamily = '微软雅黑';
+    popup.style.zIndex = 1000;
+    popup.innerText = tips[0];
+
+    document.body.appendChild(popup);
+
+    // 1.5秒后消失
+    setTimeout(() => {
+      popup.remove();
+    }, 1500);
+
+    // 下一个
+    setTimeout(createPopup, 100);
+  }
+
+  // 最终消息
+  setTimeout(() => {
+    document.body.innerHTML = '<div class="final">好好爱自己 ❤</div>';
+  }, 500 + total * 100 + 1500 + 500);
+
+  // 开始
+  setTimeout(createPopup, 500);
+</script>
+
+</body>
+</html>
